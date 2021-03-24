@@ -79,6 +79,7 @@ docker run --rm \\
     --out /report'''
                   }
               }
+            dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
               }
     }
 }
