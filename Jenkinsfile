@@ -31,7 +31,7 @@ pipeline {
                       script {
                           scannerHome = tool 'sonar';
                           withSonarQubeEnv('sonar') {
-                              sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectName=javaapplication -Dsonar.projectKey=java:findbugs -Dsonar.projectVersion=1.0 -Dsonar.projectBaseDir=$WORKSPACE -Dsonar.sources=$WORKSPACE -Dsonar.java.libraries=$WORKSPACE -Dsonar.java.binaries=$WORKSPACE"
+                              sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectName=javaapplication -Dsonar.projectKey=java:findbugs -Dsonar.projectVersion=1.0 -Dsonar.projectBaseDir=$WORKSPACE -Dsonar.sources=$WORKSPACE -Dsonar.java.libraries=$WORKSPACE -Dsonar.java.binaries=$WORKSPACE -Dsonar.exclusions=odc-reports/**"
                               sh "sleep 60"
                           }
                       }
@@ -78,8 +78,8 @@ docker run --rm \\
     --project "$DC_PROJECT" \\
     --out /report'''
                   }
+                  dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
               }
-            dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
               }
     }
 }
